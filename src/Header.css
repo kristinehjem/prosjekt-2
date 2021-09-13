@@ -1,1 +1,19 @@
+#header-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 100px;
+  margin: 0px;
+  padding: 10px;
+  background-color: blue;
+}
 
+#header-text {
+  flex-basis: 90%;
+  text-align: left;
+}
+
+#header-logo {
+  flex-basis: 10%;
+  height: 100%;
+}
