@@ -64,8 +64,9 @@ export default function Commits() {
     },
   ];
 
-  function setCommits(list: any[]) {
-    () => changeCommits(list);
+  function setCommits(list: any[]): void {
+    console.log(list);
+    //() => changeCommits(list);
   }
 
   function getCommits() {
@@ -79,18 +80,20 @@ export default function Commits() {
       })
         .then((res) => res.json())
         .then((data) => {
-          console.log(data[0]); // Loging only for testing purposes
-          return data;
+          console.log(data); // Loging only for testing purposes
+          changeCommits(data);
         });
     } catch {
       console.log("Failed fetching commits");
-      return new Error("error");
     }
   }
 
+  console.log(commits);
+
   return (
     <div>
-      <button onClick={() => setCommits(getCommits())}>click</button>
+      <button onClick={() => getCommits()}>click</button>
+      <p></p>
       <Chart data={data} />
     </div>
   );
@@ -102,7 +105,7 @@ export default function Commits() {
 //  });
 //}
 
-export function Chart(props: { data: any[] }) {
+function Chart(props: { data: any[] }) {
   // Source: https://recharts.org/en-US/api/LineChart
   // Source: https://recharts.org/en-US/examples/SimpleLineChart
 
