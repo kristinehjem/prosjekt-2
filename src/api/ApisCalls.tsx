@@ -7,19 +7,15 @@ export async function getIssuesFromGitlab() {
 }
 
 async function getDataFromGitlab(urlSuffix: String) {
-    console.log(url + urlSuffix);
-  
     try {
-      await fetch(url + urlSuffix, {
+      const res = await fetch(
+        url + urlSuffix,
+        {
         headers: new Headers({
           Authorization: "Bearer " + GITLAB_TOKEN,
         }),
       })
-        .then((res) => res.json())
-        .then((data) => {
-          console.log(data[0]); // Loging only for testing purposes
-          return data;
-        });
+      return res.json();
     } catch {
       console.log("Failed fetching", urlSuffix);
       return new Error("Failed fetching" + urlSuffix);
