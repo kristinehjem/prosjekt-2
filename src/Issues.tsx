@@ -6,14 +6,11 @@ import { Issue } from "./types";
 export default function Issues() {
 
   const [issues, setIssues] = useState<Issue[] | []>([])
-
-  useEffect(() => {
-    const fetchIssuesList = async () => {
-      const response = await getIssuesFromGitlab()
-      setIssues(response);
-    }
-    fetchIssuesList();
-  }, [])
+  const fetchIssuesList = async () => {
+    const response = await getIssuesFromGitlab()
+    setIssues(response);
+  }
+  fetchIssuesList();
 
   let issueItems = issues.map((issue) =>
     <div className="issue" onClick={showIssueDescription}>{issue.title}</div>
