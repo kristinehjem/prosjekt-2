@@ -1,8 +1,6 @@
-import { GITLAB_TOKEN } from "./tokens";
 import "./Issues.css";
 import React, { MouseEvent, useEffect, useState } from 'react';
 import { getIssuesFromGitlab } from "./api/ApisCalls"
-import { RequestListener } from "http";
 import { Issue } from "./types";
 
 export default function Issues() {
