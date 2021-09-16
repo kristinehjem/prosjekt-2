@@ -11,6 +11,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { type } from "os";
+import { stringify } from "querystring";
 
 const url = "https://gitlab.stud.idi.ntnu.no/api/v4/projects/11800";
 
@@ -30,9 +31,21 @@ interface api_commits {
   web_url: string;
 }
 
-export default function Commits() {
-  const [commits, changeCommits] = useState<any[]>([]);
+// i'nterface num_commits {
+//   date: string;
+//   numCommits: number;
+// }'
 
+export default function Commits() {
+  const [commits, changeCommits] = useState<any[]>([]); // Probably useless now
+
+  // list of object containing date and number of commits that date
+  // that will be passed to the chart for ploting
+  const [commitsData, changeCommitsData] = useState<{ [key: string]: number }>({
+    "2021-09-14": 1,
+  });
+
+  // Dummy data for testing ploting -v
   const data = [
     {
       name: "Page A",
@@ -64,14 +77,7 @@ export default function Commits() {
     },
   ];
 
-  function setCommits(list: any[]): void {
-    console.log(list);
-    //() => changeCommits(list);
-  }
-
   function getCommits() {
-    let filteredData: string[];
-
     try {
       fetch(url + "/repository/commits", {
         headers: new Headers({
@@ -80,15 +86,32 @@ export default function Commits() {
       })
         .then((res) => res.json())
         .then((data) => {
-          console.log(data); // Loging only for testing purposes
-          changeCommits(data);
+          // console.log(data); // Loging only for testing purposes
+          // changeCommits(data);
+          updateCommitData(data);
         });
     } catch {
       console.log("Failed fetching commits");
     }
   }
 
-  console.log(commits);
+  function updateCommitData(commits: api_commits[]) {
+    for (let commit of commits) {
+      const date = commit.committed_date.slice(0, 10);
+      // console.log(date);
+      if (date in commitsData) {
+        // This part does not work
+        changeCommitsData((prevCommitsData) => {
+          return { ...prevCommitsData, date: (prevCommitsData[date] += 1) }; // Does not increment the count for that date
+        });
+      } else {
+        // This part works
+        changeCommitsData((prevCommitsData) => {
+          return { ...prevCommitsData, [date]: 1 };
+        });
+      }
+    }
+  }
 
   return (
     <div>
