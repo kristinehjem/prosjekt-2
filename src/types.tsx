@@ -1,5 +1,6 @@
 export interface Issue{
     title: string;
+    state: string;
 }
 
 export interface Api_commits {
