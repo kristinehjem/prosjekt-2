@@ -1,5 +1,5 @@
 import { GITLAB_TOKEN } from "./tokens";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   LineChart,
   Line,
@@ -13,7 +13,8 @@ import {
 import { type } from "os";
 import { stringify } from "querystring";
 
-const url = "https://gitlab.stud.idi.ntnu.no/api/v4/projects/11800";
+const url = "https://gitlab.stud.idi.ntnu.no/api/v4/projects/5834";
+//const url = "https://gitlab.stud.idi.ntnu.no/api/v4/projects/11800";
 
 interface api_commits {
   id: string;
@@ -77,19 +78,17 @@ export default function Commits() {
     },
   ];
 
-  function getCommits() {
+  async function getCommits() {
     try {
-      fetch(url + "/repository/commits", {
+      const res = await fetch(url + "/repository/commits", {
         headers: new Headers({
           Authorization: "Bearer " + GITLAB_TOKEN,
         }),
       })
-        .then((res) => res.json())
-        .then((data) => {
-          // console.log(data); // Loging only for testing purposes
+        return res.json();
+          //console.log(data); // Loging only for testing purposes
           // changeCommits(data);
-          updateCommitData(data);
-        });
+          //updateCommitData(data);
     } catch {
       console.log("Failed fetching commits");
     }
@@ -98,11 +97,10 @@ export default function Commits() {
   function updateCommitData(commits: api_commits[]) {
     for (let commit of commits) {
       const date = commit.committed_date.slice(0, 10);
-      // console.log(date);
+      console.log(date)
       if (date in commitsData) {
-        // This part does not work
         changeCommitsData((prevCommitsData) => {
-          return { ...prevCommitsData, date: (prevCommitsData[date] += 1) }; // Does not increment the count for that date
+          return { ...prevCommitsData, date: (prevCommitsData[date] += 1) };
         });
       } else {
         // This part works
@@ -113,9 +111,16 @@ export default function Commits() {
     }
   }
 
+  useEffect(() => {
+    const fetchCommits = async () => {
+      const commits = await getCommits();
+      updateCommitData(commits);
+    }
+    fetchCommits();
+  })
+
   return (
     <div>
-      <button onClick={() => getCommits()}>click</button>
       <p></p>
       <Chart data={data} />
     </div>
