@@ -19,5 +19,6 @@ export interface Api_commits {
   }
 
   export interface commitsByDate {
-      [key: string] : number;
+      date: string,
+      commits: number
   }

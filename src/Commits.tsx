@@ -1,4 +1,3 @@
-import { GITLAB_TOKEN } from "./tokens";
 import React, { useEffect, useState } from "react";
 import { Api_commits, commitsByDate }from './types'
 import { getCommitsFromGitlab } from './api/ApisCalls'
@@ -16,55 +15,35 @@ import {
 export default function Commits() {
   // list of object containing date and number of commits that date
   // that will be passed to the chart for ploting
-  const [commitsData, changeCommitsData] = useState<commitsByDate>({});
-
-  // Dummy data for testing ploting -v
-  const data = [
-    {
-      name: "Page A",
-      commits: 2400,
-    },
-    {
-      name: "Page B",
-      commits: 1398,
-    },
-    {
-      name: "Page C",
-      commits: 9800,
-    },
-    {
-      name: "Page D",
-      commits: 3908,
-    },
-    {
-      name: "Page E",
-      commits: 4800,
-    },
-    {
-      name: "Page F",
-      commits: 3800,
-    },
-    {
-      name: "Page G",
-      commits: 4300,
-    },
-  ];
+  const [chartsData, setChartsData] = useState<commitsByDate[]>([{date: "2021-09-10", commits: 0}]);
+  //unused and unfinished hook to store the commits directly from api
+  const [apiCommits, setCommits] = useState<Api_commits>();
 
   function updateCommitData(commits: Api_commits[]) {
+    let localCommits: commitsByDate[] = [];
     for (let commit of commits) {
       const date = commit.committed_date.slice(0, 10);
-      if (date in commitsData) {
-        changeCommitsData((prevCommitsData) => {
-          return { ...prevCommitsData, date: (prevCommitsData[date] += 1) };
-        });
+      if ((localCommits.some(commit => commit.date === date))) {
+        localCommits = localCommits.map(commit => {
+          if (commit.date === date) {
+            return {
+              ...commit,
+              commits: commit.commits + 1,
+          }
+        } return commit;
+      })
       } else {
-        changeCommitsData((prevCommitsData) => {
-          return { ...prevCommitsData, [date]: 1 };
-        });
+        let commitDate: commitsByDate = {
+          date: date,
+          commits: 1,
+        }
+        localCommits.push(commitDate)
       }
     }
-    console.log(commitsData);
+    localCommits.reverse();
+    setChartsData(localCommits); 
   }
+
 
 useEffect(() => {
   const fetchCommits = async () => {
@@ -81,7 +60,7 @@ useEffect(() => {
   return (
     <div>
       <p></p>
-      <Chart data={data} />
+      <Chart data={chartsData} />
     </div>
   );
 }
@@ -103,7 +82,7 @@ function Chart(props: { data: any[]}) {
       }}
     >
       <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="name" />
+      <XAxis dataKey="date" />
       <YAxis />
       <Tooltip />
       <Legend />
