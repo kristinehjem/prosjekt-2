@@ -15,6 +15,7 @@ async function getDataFromGitlab(urlSuffix: String) {
           Authorization: "Bearer " + GITLAB_TOKEN,
         }),
       })
+      console.log(res);
       return res.json();
     } catch {
       console.log("Failed fetching", urlSuffix);
