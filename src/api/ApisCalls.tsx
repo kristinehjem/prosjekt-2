@@ -6,6 +6,10 @@ export async function getIssuesFromGitlab() {
     return getDataFromGitlab("/issues");
 }
 
+export async function getCommitsFromGitlab() {
+  return getDataFromGitlab("/repository/commits");
+}
+
 async function getDataFromGitlab(urlSuffix: String) {
     try {
       const res = await fetch(
