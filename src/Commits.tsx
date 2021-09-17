@@ -1,5 +1,7 @@
 import { GITLAB_TOKEN } from "./tokens";
 import React, { useEffect, useState } from "react";
+import { Api_commits, commitsByDate }from './types'
+import { getCommitsFromGitlab } from './api/ApisCalls'
 import {
   LineChart,
   Line,
@@ -10,41 +12,11 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-import { type } from "os";
-import { stringify } from "querystring";
-
-const url = "https://gitlab.stud.idi.ntnu.no/api/v4/projects/5834";
-//const url = "https://gitlab.stud.idi.ntnu.no/api/v4/projects/11800";
-
-interface api_commits {
-  id: string;
-  short_id: string;
-  created_at: string;
-  parent_ids: string[];
-  title: string;
-  message: string;
-  author_name: string;
-  author_email: string;
-  authored_date: string;
-  committer_name: string;
-  committer_email: string;
-  committed_date: string;
-  web_url: string;
-}
-
-// i'nterface num_commits {
-//   date: string;
-//   numCommits: number;
-// }'
 
 export default function Commits() {
-  const [commits, changeCommits] = useState<any[]>([]); // Probably useless now
-
   // list of object containing date and number of commits that date
   // that will be passed to the chart for ploting
-  const [commitsData, changeCommitsData] = useState<{ [key: string]: number }>({
-    "2021-09-14": 1,
-  });
+  const [commitsData, changeCommitsData] = useState<commitsByDate>({});
 
   // Dummy data for testing ploting -v
   const data = [
@@ -78,46 +50,33 @@ export default function Commits() {
     },
   ];
 
-  async function getCommits() {
-    try {
-      const res = await fetch(url + "/repository/commits", {
-        headers: new Headers({
-          Authorization: "Bearer " + GITLAB_TOKEN,
-        }),
-      })
-        return res.json();
-          //console.log(data); // Loging only for testing purposes
-          // changeCommits(data);
-          //updateCommitData(data);
-    } catch {
-      console.log("Failed fetching commits");
-    }
-  }
-
-  function updateCommitData(commits: api_commits[]) {
+  function updateCommitData(commits: Api_commits[]) {
     for (let commit of commits) {
       const date = commit.committed_date.slice(0, 10);
-      console.log(date)
       if (date in commitsData) {
         changeCommitsData((prevCommitsData) => {
           return { ...prevCommitsData, date: (prevCommitsData[date] += 1) };
         });
       } else {
-        // This part works
         changeCommitsData((prevCommitsData) => {
           return { ...prevCommitsData, [date]: 1 };
         });
       }
     }
+    console.log(commitsData);
   }
 
-  useEffect(() => {
-    const fetchCommits = async () => {
-      const commits = await getCommits();
+useEffect(() => {
+  const fetchCommits = async () => {
+    try{
+      const commits = await getCommitsFromGitlab();
       updateCommitData(commits);
+    } catch(e) {
+      console.log(e);
     }
-    fetchCommits();
-  })
+  }
+  fetchCommits();
+}, []);
 
   return (
     <div>
@@ -127,13 +86,7 @@ export default function Commits() {
   );
 }
 
-//function presentCommits() {
-//  getCommits().then((commits) => {
-//    console.log(commits);
-//  });
-//}
-
-function Chart(props: { data: any[] }) {
+function Chart(props: { data: any[]}) {
   // Source: https://recharts.org/en-US/api/LineChart
   // Source: https://recharts.org/en-US/examples/SimpleLineChart
 
