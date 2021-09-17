@@ -8,7 +8,6 @@ export default function Commits() {
 }
 
 async function getCommits() {
-  console.log(url + "/repository/commits");
 
   try {
     await fetch(url + "/repository/commits", {
@@ -18,7 +17,6 @@ async function getCommits() {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data[0]); // Loging only for testing purposes
         return data;
       });
   } catch {
