@@ -5,7 +5,8 @@ import { Issue } from "./types";
 
 export default function Issues() {
 
-  const [issues, setIssues] = useState<Issue[] | []>([])
+  const [issues, setIssues] = useState<Issue[] | []>([]);
+  const [issuesFilter, setIssuesFilter] = useState<String>("");
   useEffect(() => {
     const fetchIssuesList = async () => {
       const response = await getIssuesFromGitlab()
@@ -14,8 +15,16 @@ export default function Issues() {
       console.log("hey");
     }
     fetchIssuesList();
+    let initialFilter = localStorage.getItem('issuesFilter')
+    if (initialFilter == null) {
+      localStorage.setItem('initialFilter', 'all');
+      setIssuesFilter('all');
+    } else {
+      setIssuesFilter(initialFilter);
+    }
   }, [])
   
+  console.log(issues);
   
   let issueItems = issues.map((issue) =>
     <div className="issue" onClick={showIssueDescription}>{issue.title}</div>
