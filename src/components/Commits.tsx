@@ -1,7 +1,7 @@
-import { GITLAB_TOKEN } from "./tokens";
+import { GITLAB_TOKEN } from "../api/tokens";
 import React, { useEffect, useState } from "react";
-import { Api_commits, commitsByDate }from './types'
-import { getCommitsFromGitlab } from './api/ApisCalls'
+import { Api_commits, commitsByDate }from '../types'
+import { getCommitsFromGitlab } from '../api/ApisCalls'
 import {
   LineChart,
   Line,
