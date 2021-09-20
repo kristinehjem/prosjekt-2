@@ -17,9 +17,9 @@ export default function Issues() {
       console.log("hey");
     }
     fetchIssuesList();
-    let initialFilter = localStorage.getItem('issuesFilter')
+    let initialFilter = sessionStorage.getItem('issuesFilter')
     if (initialFilter == null) {
-      localStorage.setItem('issuesFilter', 'all');
+      sessionStorage.setItem('issuesFilter', 'all');
       setIssuesFilter('all');
     } else {
       setIssuesFilter(initialFilter);
@@ -41,15 +41,31 @@ export default function Issues() {
     setFilteredIssues(_filteredIssues)
   }, [issuesFilter, issues])
 
+  // checking in sessionStorage for the previous selected option
+  let selectOption = ""; 
+  if (sessionStorage.getItem("issuesFilter") == "all"){
+    selectOption = "Show All";
+  }
+  if (sessionStorage.getItem("issuesFilter") == "opened"){
+    selectOption = "Show open";
+  }
+  if (sessionStorage.getItem("issuesFilter") == "closed"){
+    selectOption = "Show closed";
+  }
+
   let issueItems = filteredIssues.map((issue) =>
     <div className="issue" onClick={showIssueDescription}>{issue.title}</div>
   );
   return (
     <div className="wrapper">
       <h1>Issues</h1>
-      <button onClick={() => changeFilter('all')}>Show all</button>
-      <button onClick={() => changeFilter('opened')}>Show open</button>
-      <button onClick={() => changeFilter('closed')}>Show closed</button>
+      <select className = "selectFilter" id = "selectFilterIssue" onChange={changeFilter}>
+        <option value="" selected disabled hidden>{selectOption}</option>
+        <option value= 'all' >Show all</option>
+        <option value = 'opened'>Show open</option>
+        <option value ='closed' >Show closed</option>
+      </select>
+      
       <div className="issueList">
         {issueItems}
       </div>
@@ -62,9 +78,10 @@ export default function Issues() {
 
   }
 
-  function changeFilter(filter: string) {
-    setIssuesFilter(filter);
-    localStorage.setItem('issuesFilter', filter);
+  function changeFilter(event: React.ChangeEvent<HTMLSelectElement>) {
+    console.log(event.target.value);
+    setIssuesFilter(event.target.value);
+    sessionStorage.setItem('issuesFilter', event.target.value);
   }
 }
 
