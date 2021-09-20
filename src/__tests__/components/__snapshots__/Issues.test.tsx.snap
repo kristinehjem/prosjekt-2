@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders issues 1`] = `
+<div
+  className="wrapper"
+>
+  <h1>
+    Issues
+  </h1>
+  <button
+    onClick={[Function]}
+  >
+    Show all
+  </button>
+  <button
+    onClick={[Function]}
+  >
+    Show open
+  </button>
+  <button
+    onClick={[Function]}
+  >
+    Show closed
+  </button>
+  <div
+    className="issueList"
+  />
+</div>
+`;
