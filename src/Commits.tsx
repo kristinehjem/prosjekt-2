@@ -10,8 +10,9 @@ import {
   Tooltip,
   Legend,
   ResponsiveContainer,
+  AreaChart,
+  Area,
 } from "recharts";
-import useWindowDimensions from "./hooks/useWindowSize";
 import "./Commits.css";
 // import { format } from "path";
 import { format, parseISO } from "date-fns";
@@ -24,10 +25,6 @@ export default function Commits() {
   ]);
   //unused and unfinished hook to store the commits directly from api
   const [apiCommits, setCommits] = useState<Api_commits>();
-
-  const { height, width } = useWindowDimensions();
-  let containerWidth = width;
-  // const commitsRef = useRef<HTMLDivElement>(null);
 
   function updateCommitData(commits: Api_commits[]) {
     let localCommits: commitsByDate[] = [];
@@ -67,15 +64,8 @@ export default function Commits() {
     fetchCommits();
   }, []);
 
-  // useLayoutEffect(() => {
-  //   if (null !== commitsRef.current) {
-  //     containerWidth = commitsRef.current.clientWidth;
-  //   }
-  // });
-
   let props = {
     data: chartsData,
-    width: containerWidth,
   };
 
   return (
@@ -86,19 +76,12 @@ export default function Commits() {
   );
 }
 
-function Chart(props: { data: commitsByDate[]; width: number }) {
+function Chart(props: { data: commitsByDate[] }) {
   // Source: https://recharts.org/en-US/api/LineChart
   // Source: https://recharts.org/en-US/examples/SimpleLineChart
   // Source: https://www.youtube.com/watch?v=e4en8kRqwe8
 
-  let containerWidth = useRef<number>(0);
-  let chartRef = useRef<HTMLDivElement>(null);
-
-  useLayoutEffect(() => {
-    if (null !== chartRef.current) {
-      containerWidth.current = chartRef.current.clientWidth;
-    }
-  });
+  const graphColor = "#8884d8";
 
   function CustomTooltip({ active, payload, label }: any) {
     if (active) {
@@ -118,30 +101,41 @@ function Chart(props: { data: commitsByDate[]; width: number }) {
   }
 
   return (
-    <div className="chart" ref={chartRef}>
-      <LineChart
-        width={containerWidth.current}
-        height={300}
-        data={props.data}
-        margin={{
-          top: 5,
-          right: 30,
-          left: 20,
-          bottom: 5,
-        }}
-      >
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="date" />
-        <YAxis />
-        <Tooltip content={<CustomTooltip />} />
-        <Legend />
-        <Line
-          type="monotone"
-          dataKey="commits"
-          stroke="#8884d8"
-          activeDot={{ r: 8 }}
-        />
-      </LineChart>
+    <div className="chart">
+      <ResponsiveContainer width="100%" height={400}>
+        <AreaChart
+          data={props.data}
+          margin={{
+            top: 5,
+            right: 50,
+            left: 0,
+            bottom: 5,
+          }}
+        >
+          <defs>
+            <linearGradient id="fill-color" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor={graphColor} stopOpacity={0.7} />
+              <stop offset="100%" stopColor={graphColor} stopOpacity={0.1} />
+            </linearGradient>
+          </defs>
+          <CartesianGrid strokeDasharray="3 3" vertical={false} />
+          <XAxis
+            dataKey="date"
+            tickFormatter={(str) => {
+              return format(parseISO(str), "MMM, d");
+            }}
+          />
+          <YAxis />
+          <Tooltip content={<CustomTooltip />} />
+          <Area
+            type="monotone"
+            dataKey="commits"
+            stroke={graphColor}
+            fill="url(#fill-color)"
+            activeDot={{ r: 8 }}
+          />
+        </AreaChart>
+      </ResponsiveContainer>
     </div>
   );
 }
