@@ -12,7 +12,8 @@
 
 .tooltip {
   background-color: rgba(136, 132, 216, 0.2);
-  border: 2px solid black;
+  border: 2px solid rgba(0, 0, 0, 0.6);
+  color: rgba(0, 0, 0, 0.8);
   border-radius: 5px;
   padding-left: 5px;
   padding-right: 5px;

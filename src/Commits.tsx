@@ -1,21 +1,25 @@
-import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Api_commits, commitsByDate } from "./types";
 import { getCommitsFromGitlab } from "./api/ApisCalls";
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
-  AreaChart,
-  Area,
-} from "recharts";
+import Chart from "./CommitsChart";
 import "./Commits.css";
-// import { format } from "path";
-import { format, parseISO } from "date-fns";
+
+function getDates(startDateStr: string) {
+  // Takes dates on the format '2000-01-01'
+  let currentDate = new Date(startDateStr + "T00:00:00");
+  const stopDate = new Date();
+  let allDates: commitsByDate[] = [];
+
+  while (currentDate <= stopDate) {
+    let date: commitsByDate = {
+      date: currentDate.toISOString().slice(0, 10),
+      commits: 0,
+    };
+    allDates.push(date);
+    currentDate.setDate(currentDate.getDate() + 1);
+  }
+  return allDates;
+}
 
 export default function Commits() {
   // list of object containing date and number of commits that date
@@ -27,28 +31,21 @@ export default function Commits() {
   const [apiCommits, setCommits] = useState<Api_commits>();
 
   function updateCommitData(commits: Api_commits[]) {
-    let localCommits: commitsByDate[] = [];
+    const firstCommitDate = commits.slice(-1)[0].committed_date.slice(0, 10);
+
+    let localCommits: commitsByDate[] = getDates(firstCommitDate);
     for (let commit of commits) {
       const date = commit.committed_date.slice(0, 10);
-      if (localCommits.some((commit) => commit.date === date)) {
-        localCommits = localCommits.map((commit) => {
-          if (commit.date === date) {
-            return {
-              ...commit,
-              commits: commit.commits + 1,
-            };
-          }
-          return commit;
-        });
-      } else {
-        let commitDate: commitsByDate = {
-          date: date,
-          commits: 1,
-        };
-        localCommits.push(commitDate);
-      }
+      localCommits = localCommits.map((commit) => {
+        if (commit.date === date) {
+          return {
+            ...commit,
+            commits: commit.commits + 1,
+          };
+        }
+        return commit;
+      });
     }
-    localCommits.reverse();
     setChartsData(localCommits);
   }
 
@@ -64,7 +61,7 @@ export default function Commits() {
     fetchCommits();
   }, []);
 
-  let props = {
+  const props = {
     data: chartsData,
   };
 
@@ -72,70 +69,6 @@ export default function Commits() {
     <div className="commits">
       <p></p>
       <Chart {...props} />
-    </div>
-  );
-}
-
-function Chart(props: { data: commitsByDate[] }) {
-  // Source: https://recharts.org/en-US/api/LineChart
-  // Source: https://recharts.org/en-US/examples/SimpleLineChart
-  // Source: https://www.youtube.com/watch?v=e4en8kRqwe8
-
-  const graphColor = "#8884d8";
-
-  function CustomTooltip({ active, payload, label }: any) {
-    if (active) {
-      return (
-        <div className="tooltip">
-          <h4 className="date">
-            {format(parseISO(label), "eeee, d. MMM, yyyy")}
-          </h4>
-          <p className="numCommits">
-            Commits: {JSON.stringify(payload[0].value, null, 2)}
-          </p>
-        </div>
-      );
-    } else {
-      return null;
-    }
-  }
-
-  return (
-    <div className="chart">
-      <ResponsiveContainer width="100%" height={400}>
-        <AreaChart
-          data={props.data}
-          margin={{
-            top: 5,
-            right: 50,
-            left: 0,
-            bottom: 5,
-          }}
-        >
-          <defs>
-            <linearGradient id="fill-color" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor={graphColor} stopOpacity={0.7} />
-              <stop offset="100%" stopColor={graphColor} stopOpacity={0.1} />
-            </linearGradient>
-          </defs>
-          <CartesianGrid strokeDasharray="3 3" vertical={false} />
-          <XAxis
-            dataKey="date"
-            tickFormatter={(str) => {
-              return format(parseISO(str), "MMM, d");
-            }}
-          />
-          <YAxis />
-          <Tooltip content={<CustomTooltip />} />
-          <Area
-            type="monotone"
-            dataKey="commits"
-            stroke={graphColor}
-            fill="url(#fill-color)"
-            activeDot={{ r: 8 }}
-          />
-        </AreaChart>
-      </ResponsiveContainer>
     </div>
   );
 }
