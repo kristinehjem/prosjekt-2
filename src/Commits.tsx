@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Api_commits, commitsByDate } from "./types";
 import { getCommitsFromGitlab } from "./api/ApisCalls";
 import Chart from "./CommitsChart";
+import DateSlider from "./DateSlider";
 import "./Commits.css";
 
 function getDates(startDateStr: string) {
@@ -67,8 +68,8 @@ export default function Commits() {
 
   return (
     <div className="commits">
-      <p></p>
       <Chart {...props} />
+      <DateSlider {...props} />
     </div>
   );
 }
