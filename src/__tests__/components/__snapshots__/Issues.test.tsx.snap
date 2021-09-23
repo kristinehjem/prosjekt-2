@@ -7,21 +7,35 @@ exports[`renders issues 1`] = `
   <h1>
     Issues
   </h1>
-  <button
-    onClick={[Function]}
+  <select
+    className="selectFilter"
+    data-testid="selectFilterIssue"
+    onChange={[Function]}
   >
-    Show all
-  </button>
-  <button
-    onClick={[Function]}
-  >
-    Show open
-  </button>
-  <button
-    onClick={[Function]}
-  >
-    Show closed
-  </button>
+    <option
+      disabled={true}
+      hidden={true}
+      selected={true}
+      value=""
+    >
+      
+    </option>
+    <option
+      value="all"
+    >
+      Show all
+    </option>
+    <option
+      value="opened"
+    >
+      Show open
+    </option>
+    <option
+      value="closed"
+    >
+      Show closed
+    </option>
+  </select>
   <div
     className="issueList"
   />
