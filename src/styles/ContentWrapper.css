@@ -1,0 +1,34 @@
+.content-wrapper {
+    display: flex;
+    height: 100%;
+}
+.sidebar-wrapper {
+    height: 100%;
+    display: flex;
+}
+@media (min-width: 600px){
+    .sidebar-wrapper {
+        width: 15vw;
+    }
+    .content {
+        width: 85vw;
+    }
+}
+
+@media (max-width: 600px){
+    .content-wrapper{
+        flex-direction: column;
+    }
+    .sidebar-wrapper {
+        height: fit-content;
+        max-height: 20vh;
+    }
+    .content {
+        height: 80vh;
+        width: 100vw;
+
+    }
+    .sidebar-wrapper > .sidebar nav ul li {
+        padding: 0.5em 0.25em;
+    }
+}
