@@ -15,12 +15,10 @@ export default function Issues() {
     const fetchIssuesList = async () => {
       const response = await getIssuesFromGitlab()
       setIssues(response);
-      // console.log(response);
-      // console.log("hey");
     }
     fetchIssuesList();
     let initialFilter = sessionStorage.getItem('issuesFilter')
-    if (initialFilter == null) {
+    if (initialFilter === null) {
       sessionStorage.setItem('issuesFilter', 'all');
       setIssuesFilter('all');
     } else {
@@ -30,33 +28,32 @@ export default function Issues() {
 
   useEffect(() => {
     let _filteredIssues = []
-    if (issuesFilter == 'all') {
+    if (issuesFilter === 'all') {
       _filteredIssues = issues;
     }
     else {
       _filteredIssues = issues
       _filteredIssues = _filteredIssues.filter(issue => {
-        return issue.state == issuesFilter
+        return issue.state === issuesFilter
       })
     }
-    // console.log("filteredIssues", _filteredIssues);
     setFilteredIssues(_filteredIssues)
   }, [issuesFilter, issues])
 
   // checking in sessionStorage for the previous selected option
   let selectOption = ""; 
-  if (sessionStorage.getItem("issuesFilter") == "all"){
+  if (sessionStorage.getItem("issuesFilter") === "all"){
     selectOption = "Show All";
   }
-  if (sessionStorage.getItem("issuesFilter") == "opened"){
+  if (sessionStorage.getItem("issuesFilter") === "opened"){
     selectOption = "Show open";
   }
-  if (sessionStorage.getItem("issuesFilter") == "closed"){
+  if (sessionStorage.getItem("issuesFilter") === "closed"){
     selectOption = "Show closed";
   }
 
-  let issueItems = filteredIssues.map((issue) =>
-    <div className="issue" onClick={showIssueDescription}>
+  let issueItems = filteredIssues.map((issue, i) =>
+    <div key={i} className="issue" onClick={showIssueDescription}>
       <IssueCard title = {issue.title} description = {issue.description} issueNumber ={issue.iid} labels = {issue.labels}/>
     </div>
   );
@@ -64,7 +61,7 @@ export default function Issues() {
     <div className="wrapper">
       <h1>Issues</h1>
       <div className = "selectFilter">
-      <select id = "selectFilterIssue" data-testid="selectFilterIssue" onChange={changeFilter}>
+      <select data-testid="selectFilterIssue" onChange={changeFilter}>
         <option value="" selected disabled hidden>{selectOption}</option>
         <option value= 'all'  >Show all</option>
         <option value = 'opened' >Show open</option>
