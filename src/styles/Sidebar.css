@@ -1,0 +1,24 @@
+.sidebar {
+    height: 100%;
+    width: 100%;
+}
+nav {
+    height: 100%;
+    white-space: nowrap;
+    color: white;
+    background: #37474F;
+  }
+  nav ul {
+    list-style: none;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+  }
+    nav ul li{
+        margin: 0;
+        padding: 1.5em 0.5em;
+    }
+    nav ul li:hover {
+        cursor: pointer;
+        background: black;
+    }

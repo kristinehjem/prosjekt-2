@@ -1,4 +1,4 @@
-import { Api_commits, commitsByDate } from "./types";
+import { Api_commits, commitsByDate } from "../types";
 import { format, parseISO } from "date-fns";
 import {
   LineChart,
