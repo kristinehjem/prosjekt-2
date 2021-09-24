@@ -16,7 +16,7 @@ export default function IssueCard(props: {title: string, description: string, is
     
 
   return (
-    <Card className ="issueCard" sx={{ width: 150, height: 200 }}>
+    <Card className ="issueCard" sx={{ width: "100%", height: "100%" }}>
       <CardContent>
         <Typography sx={{ fontSize: 12}} color="text.secondary" gutterBottom>
           #{props.issueNumber}
