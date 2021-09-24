@@ -64,10 +64,10 @@ export default function Issues() {
     <div className="wrapper">
       <h1>Issues</h1>
       <div className = "selectFilter">
-      <select id = "selectFilterIssue" onChange={changeFilter}>
+      <select id = "selectFilterIssue" data-testid="selectFilterIssue" onChange={changeFilter}>
         <option value="" selected disabled hidden>{selectOption}</option>
-        <option value= 'all' >Show all</option>
-        <option value = 'opened'>Show open</option>
+        <option value= 'all'  >Show all</option>
+        <option value = 'opened' >Show open</option>
         <option value ='closed' >Show closed</option>
       </select>
       </div>

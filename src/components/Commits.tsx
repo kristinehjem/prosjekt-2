@@ -68,6 +68,7 @@ export default function Commits() {
   }
 
   useEffect(() => {
+    let isMounted = true
     const fetchCommits = async () => {
       try {
         const commits = await getCommitsFromGitlab();
