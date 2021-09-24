@@ -1,8 +1,8 @@
 import * as React from "react";
 import Slider from "@mui/material/Slider";
 import { format, parseISO } from "date-fns";
-import "./DateSlider.css";
-import { commitsByDate } from "./types";
+import "../styles/DateSlider.css";
+import { commitsByDate } from "../types";
 
 const minDistance = 1;
 
