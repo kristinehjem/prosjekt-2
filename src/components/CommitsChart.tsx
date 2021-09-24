@@ -1,4 +1,4 @@
-import { commitsByDate } from "./types";
+import { commitsByDate } from "../types";
 import { format, parseISO } from "date-fns";
 import {
   XAxis,

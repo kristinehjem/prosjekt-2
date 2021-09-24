@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Api_commits, commitsByDate } from "./types";
-import { getCommitsFromGitlab } from "./api/ApisCalls";
+import { Api_commits, commitsByDate } from "../types";
+import { getCommitsFromGitlab } from "../api/ApisCalls";
 import Chart from "./CommitsChart";
 import DateSlider from "./DateSlider";
-import "./Commits.css";
+import "../styles/Commits.css";
 
 function getDates(startDateStr: string) {
   /**

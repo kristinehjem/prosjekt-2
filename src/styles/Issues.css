@@ -1,0 +1,24 @@
+.issueList {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    height: 100%;
+    gap: 10px;
+    justify-items: center;
+}
+
+.wrapper {
+    margin: 5% 10%
+}
+
+#selectFilterIssue {
+    margin: 15px;
+    padding: 8px;
+    border: 1px solid black;
+    background-color: bisque;
+    border-radius: 10px;
+}
+
+
+
+
+
