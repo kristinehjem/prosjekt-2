@@ -5,7 +5,7 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import "./IssueCard.css"
+import "../styles/IssueCard.css"
 import { fontWeight } from '@mui/system';
 
 //code from https://mui.com/components/cards/

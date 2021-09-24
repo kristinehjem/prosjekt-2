@@ -1,8 +1,9 @@
-import "./Issues.css";
+import "../styles/Issues.css";
 import React, { MouseEvent, useEffect, useState } from 'react';
-import { getIssuesFromGitlab } from "./api/ApisCalls"
-import { Issue } from "./types";
+import { getIssuesFromGitlab } from "../api/ApisCalls"
+import { Issue } from "../types";
 import  IssueCard  from "./IssueCard"
+
 
 export default function Issues() {
 

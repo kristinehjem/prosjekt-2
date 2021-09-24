@@ -1,15 +1,13 @@
 import React from "react";
-import "./App.css";
-import Commits from "./Commits";
-import Issues from "./Issues";
+import "../styles/App.css";
 import Header from "./Header";
+import ContentWrapper from "./ContentWrapper";
 
 function App() {
   return (
     <div className="App">
       <Header />
-      <Issues />
-      <Commits />
+      <ContentWrapper />
     </div>
   );
 }
