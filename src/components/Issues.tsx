@@ -15,8 +15,8 @@ export default function Issues() {
     const fetchIssuesList = async () => {
       const response = await getIssuesFromGitlab()
       setIssues(response);
-      console.log(response);
-      console.log("hey");
+      // console.log(response);
+      // console.log("hey");
     }
     fetchIssuesList();
     let initialFilter = sessionStorage.getItem('issuesFilter')
@@ -39,7 +39,7 @@ export default function Issues() {
         return issue.state == issuesFilter
       })
     }
-    console.log("filteredIssues", _filteredIssues);
+    // console.log("filteredIssues", _filteredIssues);
     setFilteredIssues(_filteredIssues)
   }, [issuesFilter, issues])
 
@@ -64,10 +64,10 @@ export default function Issues() {
     <div className="wrapper">
       <h1>Issues</h1>
       <div className = "selectFilter">
-      <select id = "selectFilterIssue" onChange={changeFilter}>
+      <select id = "selectFilterIssue" data-testid="selectFilterIssue" onChange={changeFilter}>
         <option value="" selected disabled hidden>{selectOption}</option>
-        <option value= 'all' >Show all</option>
-        <option value = 'opened'>Show open</option>
+        <option value= 'all'  >Show all</option>
+        <option value = 'opened' >Show open</option>
         <option value ='closed' >Show closed</option>
       </select>
       </div>

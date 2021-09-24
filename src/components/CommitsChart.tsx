@@ -1,13 +1,11 @@
-import { Api_commits, commitsByDate } from "../types";
+import { commitsByDate } from "../types";
 import { format, parseISO } from "date-fns";
+import { useDateIntevall } from "../contexts/DateFilterContext";
 import {
-  LineChart,
-  Line,
   XAxis,
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend,
   ResponsiveContainer,
   AreaChart,
   Area,
@@ -19,6 +17,9 @@ export default function Chart(props: { data: commitsByDate[] }) {
   // Source: https://www.youtube.com/watch?v=e4en8kRqwe8
 
   const graphColor = "#8884d8";
+
+  const [start, end] = useDateIntevall();
+  const filteredData = props.data.slice(start, end + 1);
 
   function CustomTooltip({ active, payload, label }: any) {
     if (active) {
@@ -41,7 +42,8 @@ export default function Chart(props: { data: commitsByDate[] }) {
     <div className="chart">
       <ResponsiveContainer width="100%" height={400}>
         <AreaChart
-          data={props.data}
+          // data={props.data.slice(3, 8)}
+          data={filteredData}
           margin={{
             top: 5,
             right: 50,

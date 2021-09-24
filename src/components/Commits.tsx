@@ -2,11 +2,21 @@ import React, { useEffect, useState } from "react";
 import { Api_commits, commitsByDate } from "../types";
 import { getCommitsFromGitlab } from "../api/ApisCalls";
 import Chart from "./CommitsChart";
+import DateSlider from "./DateSlider";
 import "../styles/Commits.css";
 
 function getDates(startDateStr: string) {
-  // Takes dates on the format '2000-01-01'
-  let currentDate = new Date(startDateStr + "T00:00:00");
+  /**
+   * Retuns an array of objects with all dates from start date untill
+   * today with number of commits that day equal to 0
+   *
+   * @param startDateStr - First date in the array as a string on the
+   * format "YYYY-MM-DD"
+   *
+   * @returns List of objects from start date untill today on the
+   * format [{date: "2000-01-01", commits: 0}, ...]
+   */
+  let currentDate = new Date(startDateStr);
   const stopDate = new Date();
   let allDates: commitsByDate[] = [];
 
@@ -27,29 +37,38 @@ export default function Commits() {
   const [chartsData, setChartsData] = useState<commitsByDate[]>([
     { date: "2021-09-10", commits: 0 },
   ]);
-  //unused and unfinished hook to store the commits directly from api
-  const [apiCommits, setCommits] = useState<Api_commits>();
 
-  function updateCommitData(commits: Api_commits[]) {
-    const firstCommitDate = commits.slice(-1)[0].committed_date.slice(0, 10);
+  function updateCommitData(apiCommits: Api_commits[]) {
+    /**
+     * Function taking api respons from commits and updating state
+     * of chartsData
+     *
+     * @param commits - Resons from GitLab API. Array of Api_commits
+     */
+    const firstCommitDate = apiCommits.slice(-1)[0].committed_date.slice(0, 10);
 
-    let localCommits: commitsByDate[] = getDates(firstCommitDate);
-    for (let commit of commits) {
-      const date = commit.committed_date.slice(0, 10);
-      localCommits = localCommits.map((commit) => {
-        if (commit.date === date) {
+    // Array of commitsByDate that is used to update state of chatsData
+    let newChartsDataState: commitsByDate[] = getDates(firstCommitDate);
+
+    for (let apiCommit of apiCommits) {
+      const date = apiCommit.committed_date.slice(0, 10);
+      newChartsDataState = newChartsDataState.map((chartDataObject) => {
+        // Increment number of commits that day if the chartDataObject
+        // is equal to the date of the commit returned from the api
+        if (chartDataObject.date === date) {
           return {
-            ...commit,
-            commits: commit.commits + 1,
+            ...chartDataObject,
+            commits: chartDataObject.commits + 1,
           };
         }
-        return commit;
+        return chartDataObject;
       });
     }
-    setChartsData(localCommits);
+    setChartsData(newChartsDataState);
   }
 
   useEffect(() => {
+    let isMounted = true
     const fetchCommits = async () => {
       try {
         const commits = await getCommitsFromGitlab();
@@ -67,8 +86,8 @@ export default function Commits() {
 
   return (
     <div className="commits">
-      <p></p>
       <Chart {...props} />
+      <DateSlider {...props} />
     </div>
   );
 }
