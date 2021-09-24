@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Api_commits, commitsByDate } from "./types";
-import { getCommitsFromGitlab } from "./api/ApisCalls";
+import { Api_commits, commitsByDate } from "../types";
+import { getCommitsFromGitlab } from "../api/ApisCalls";
 import Chart from "./CommitsChart";
-import "./Commits.css";
+import "../styles/Commits.css";
 
 function getDates(startDateStr: string) {
   // Takes dates on the format '2000-01-01'
@@ -50,6 +50,7 @@ export default function Commits() {
   }
 
   useEffect(() => {
+    let isMounted = true
     const fetchCommits = async () => {
       try {
         const commits = await getCommitsFromGitlab();

@@ -1,8 +1,11 @@
+import { render } from '@testing-library/react';
 import React from 'react';
 import renderer from 'react-test-renderer';
-import Commits from '../../Commits'
+import Commits from '../../components/Commits'
+import Chart from '../../components/CommitsChart'
+import { commitsByDate } from "../../types";
 
 test('renders commits', () => {
-    const tree = renderer.create(<Commits />).toJSON();
-    expect(tree).toMatchSnapshot();
+  const { container } = render(<Commits/>);
+  expect(container).toMatchSnapshot();
   });

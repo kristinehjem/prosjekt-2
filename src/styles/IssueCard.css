@@ -1,0 +1,20 @@
+.labels {
+    margin: 20px;
+    width: 100%;
+    white-space: nowrap;
+    overflow-x: auto;
+}
+
+.label {
+    display: inline-block;
+    width: 1fr;
+    margin: 2px 2px;
+    padding: 4px;
+    background-color: bisque;
+    border-radius: 15px;
+    font-size: 14px;
+}
+
+.issueCard {
+    border: 1px solid #333;
+}

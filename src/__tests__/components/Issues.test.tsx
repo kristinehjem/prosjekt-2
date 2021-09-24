@@ -1,7 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import {render, screen, cleanup} from '@testing-library/react'
-import Issues from '../../Issues'
+import Issues from '../../components/Issues'
 import userEvent from '@testing-library/user-event'
 
 afterEach(cleanup);

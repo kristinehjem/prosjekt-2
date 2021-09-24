@@ -1,7 +1,9 @@
-import "./Issues.css";
+import "../styles/Issues.css";
 import React, { MouseEvent, useEffect, useState } from 'react';
-import { getIssuesFromGitlab } from "./api/ApisCalls"
-import { Issue } from "./types";
+import { getIssuesFromGitlab } from "../api/ApisCalls"
+import { Issue } from "../types";
+import  IssueCard  from "./IssueCard"
+
 
 export default function Issues() {
 
@@ -54,18 +56,21 @@ export default function Issues() {
   }
 
   let issueItems = filteredIssues.map((issue) =>
-    <div className="issue" onClick={showIssueDescription}>{issue.title}</div>
+    <div className="issue" onClick={showIssueDescription}>
+      <IssueCard title = {issue.title} description = {issue.description} issueNumber ={issue.iid} labels = {issue.labels}/>
+    </div>
   );
   return (
     <div className="wrapper">
       <h1>Issues</h1>
-      <select className = "selectFilter" data-testid = "selectFilterIssue" onChange={changeFilter}>
+      <div className = "selectFilter">
+      <select id = "selectFilterIssue" data-testid="selectFilterIssue" onChange={changeFilter}>
         <option value="" selected disabled hidden>{selectOption}</option>
         <option value= 'all'  >Show all</option>
         <option value = 'opened' >Show open</option>
         <option value ='closed' >Show closed</option>
       </select>
-      
+      </div>
       <div className="issueList">
         {issueItems}
       </div>
