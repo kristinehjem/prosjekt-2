@@ -1,13 +1,10 @@
-import { Api_commits, commitsByDate } from "./types";
+import { commitsByDate } from "./types";
 import { format, parseISO } from "date-fns";
 import {
-  LineChart,
-  Line,
   XAxis,
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend,
   ResponsiveContainer,
   AreaChart,
   Area,
