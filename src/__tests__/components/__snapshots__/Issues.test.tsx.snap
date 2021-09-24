@@ -12,7 +12,6 @@ exports[`renders issues 1`] = `
   >
     <select
       data-testid="selectFilterIssue"
-      id="selectFilterIssue"
       onChange={[Function]}
     >
       <option
