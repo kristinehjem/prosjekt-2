@@ -3,6 +3,10 @@ import Slider from "@mui/material/Slider";
 import { format, parseISO } from "date-fns";
 import "../styles/DateSlider.css";
 import { commitsByDate } from "../types";
+import {
+  useDateIntervallUpdate,
+  useDateIntevall,
+} from "../contexts/DateFilterContext";
 
 const minDistance = 1;
 
@@ -14,7 +18,9 @@ function numberToDate(currentNum: number, startDateStr: string): string {
 
 export default function DateSlider(props: { data: commitsByDate[] }) {
   const numDays = props.data.length;
-  const [value1, setValue1] = React.useState<number[]>([0, numDays]);
+  // const [value, setvalue] = React.useState<number[]>([0, numDays]);
+  const setIntervall = useDateIntervallUpdate();
+  const intervall = useDateIntevall();
 
   const marks = [
     {
@@ -22,7 +28,7 @@ export default function DateSlider(props: { data: commitsByDate[] }) {
       label: format(parseISO(props.data[0].date), "MMM, d"),
     },
     {
-      value: numDays,
+      value: numDays - 1,
       label: format(parseISO(props.data.slice(-1)[0].date), "MMM, d"),
     },
   ];
@@ -37,17 +43,23 @@ export default function DateSlider(props: { data: commitsByDate[] }) {
     }
 
     if (activeThumb === 0) {
-      setValue1([Math.min(newValue[0], value1[1] - minDistance), value1[1]]);
+      setIntervall(
+        Math.min(newValue[0], intervall[1] - minDistance),
+        intervall[1]
+      );
     } else {
-      setValue1([value1[0], Math.max(newValue[1], value1[0] + minDistance)]);
+      setIntervall(
+        intervall[0],
+        Math.max(newValue[1], intervall[0] + minDistance)
+      );
     }
   };
 
   return (
     <div className="date-slider-wrapper">
       <Slider
-        max={numDays}
-        value={value1}
+        max={numDays - 1}
+        value={intervall}
         marks={marks}
         onChange={handleChange1}
         valueLabelDisplay="auto"

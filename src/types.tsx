@@ -1,9 +1,9 @@
-export interface Issue{
-    title: string;
-    state: string;
-    description: string;
-    iid: number;
-    labels: string[];
+export interface Issue {
+  title: string;
+  state: string;
+  description: string;
+  iid: number;
+  labels: string[];
 }
 
 export interface Api_commits {

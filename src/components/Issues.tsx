@@ -15,8 +15,8 @@ export default function Issues() {
     const fetchIssuesList = async () => {
       const response = await getIssuesFromGitlab()
       setIssues(response);
-      console.log(response);
-      console.log("hey");
+      // console.log(response);
+      // console.log("hey");
     }
     fetchIssuesList();
     let initialFilter = sessionStorage.getItem('issuesFilter')
@@ -39,7 +39,7 @@ export default function Issues() {
         return issue.state == issuesFilter
       })
     }
-    console.log("filteredIssues", _filteredIssues);
+    // console.log("filteredIssues", _filteredIssues);
     setFilteredIssues(_filteredIssues)
   }, [issuesFilter, issues])
 
