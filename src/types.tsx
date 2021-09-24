@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 export interface Issue{
     title: string;
     state: string;
@@ -26,3 +28,7 @@ export interface Api_commits {
       date: string,
       commits: number
   }
+
+  export type contentContextApiProps = {
+    children: ReactNode,
+}
