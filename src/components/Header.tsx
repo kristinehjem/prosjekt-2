@@ -1,3 +1,6 @@
-export default function Header() {
-  return <h1>This is Header</h1>;
-}
+import React from "react";
+export default class Header extends React.Component{
+  render() {
+    return <h1>This is Header</h1>;
+  }
+};
