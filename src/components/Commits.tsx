@@ -3,9 +3,10 @@ import { Api_commits, commitsByDate } from "../types";
 import { getCommitsFromGitlab } from "../api/ApisCalls";
 import Chart from "./CommitsChart";
 import DateSlider from "./DateSlider";
+import ContentDescription from "./ContentDescription";
 import "../styles/Commits.css";
 
-function getDates(startDateStr: string) {
+function getDates(startDateStr: string, stopDateStr: string) {
   /**
    * Retuns an array of objects with all dates from start date untill
    * today with number of commits that day equal to 0
@@ -17,7 +18,7 @@ function getDates(startDateStr: string) {
    * format [{date: "2000-01-01", commits: 0}, ...]
    */
   let currentDate = new Date(startDateStr);
-  const stopDate = new Date();
+  const stopDate = new Date(stopDateStr);
   let allDates: commitsByDate[] = [];
 
   while (currentDate <= stopDate) {
@@ -46,9 +47,13 @@ export default function Commits() {
      * @param commits - Resons from GitLab API. Array of Api_commits
      */
     const firstCommitDate = apiCommits.slice(-1)[0].committed_date.slice(0, 10);
+    const lastCommitDate = apiCommits[0].committed_date.slice(0, 10);
 
     // Array of commitsByDate that is used to update state of chatsData
-    let newChartsDataState: commitsByDate[] = getDates(firstCommitDate);
+    let newChartsDataState: commitsByDate[] = getDates(
+      firstCommitDate,
+      lastCommitDate
+    );
 
     for (let apiCommit of apiCommits) {
       const date = apiCommit.committed_date.slice(0, 10);
@@ -68,7 +73,7 @@ export default function Commits() {
   }
 
   useEffect(() => {
-    let isMounted = true
+    let isMounted = true;
     const fetchCommits = async () => {
       try {
         const commits = await getCommitsFromGitlab();
@@ -84,8 +89,15 @@ export default function Commits() {
     data: chartsData,
   };
 
+  const contentDescriptionProps = {
+    header: "Commits",
+    content:
+      "The graph below shows commits per day over the period chosen on the slider under the graph. 10th of september was the day of the first commits, and the end date on the graph is the date of the latest commit to the repository.",
+  };
+
   return (
     <div className="commits">
+      <ContentDescription {...contentDescriptionProps} />
       <Chart {...props} />
       <DateSlider {...props} />
     </div>

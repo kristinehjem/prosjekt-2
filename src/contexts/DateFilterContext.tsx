@@ -20,7 +20,7 @@ export type contextProps = {
   children: ReactNode;
 };
 export function DateIntervallProvider(children: contextProps) {
-  const [dateIntervall, changeDateIntervall] = useState<number[]>([0, 15]);
+  const [dateIntervall, changeDateIntervall] = useState<number[]>([0, 10]);
 
   function setDateIntervall(start: number, end: number) {
     changeDateIntervall([start, end]);
