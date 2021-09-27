@@ -1,7 +1,16 @@
 import React from "react";
-import { contentContextUpdate } from "../contexts/contextApi";
+import { contentContextUpdate} from "../contexts/contextApi";
 import "../styles/Sidebar.css"
 class Sidebar extends React.Component {
+    static contextType = contentContextUpdate;
+    
+    componentDidMount() {
+        const content = this.context
+        const sidebarView = localStorage.getItem('sidebarView');
+        if (sidebarView != null) {
+            content(sidebarView);
+        }
+    }
     render() {
         return (
             <contentContextUpdate.Consumer>

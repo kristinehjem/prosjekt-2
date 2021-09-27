@@ -1,8 +1,8 @@
 .labels {
     margin: 20px;
+    height: 100%;
     width: 100%;
     white-space: nowrap;
-    overflow-x: auto;
 }
 
 .label {
@@ -10,11 +10,15 @@
     width: 1fr;
     margin: 2px 2px;
     padding: 4px;
-    background-color: bisque;
+    background-color: #e5dbe2;
     border-radius: 15px;
     font-size: 14px;
 }
 
 .issueCard {
-    border: 1px solid #333;
+    border: 1px solid #37474F;
+    background-color: #fdfefe;
+    font-family: 'Montserrat';
 }
+
+
