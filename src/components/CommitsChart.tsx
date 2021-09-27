@@ -1,6 +1,7 @@
 import { commitsByDate } from "../types";
 import { format, parseISO } from "date-fns";
 import { useDateIntevall } from "../contexts/DateFilterContext";
+import "../styles/CommitsChart.css";
 import {
   XAxis,
   YAxis,
@@ -42,7 +43,6 @@ export default function Chart(props: { data: commitsByDate[] }) {
     <div className="chart">
       <ResponsiveContainer width="100%" height={400}>
         <AreaChart
-          // data={props.data.slice(3, 8)}
           data={filteredData}
           margin={{
             top: 5,

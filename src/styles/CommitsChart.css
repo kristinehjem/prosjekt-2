@@ -1,0 +1,13 @@
+.tooltip {
+  background-color: hsla(200, 18%, 26%, 0.1);
+  border-radius: 10px;
+  padding: 5px;
+}
+
+h4.date {
+  margin: 2px;
+}
+
+p.numCommits {
+  margin: 2px;
+}
