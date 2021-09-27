@@ -16,18 +16,6 @@ export default function IssueCard(props: {title: string, description: string, is
     let issueLabels = props.labels.map((label)=>
     <div className="label">{label}</div>)
     let [open, setOpen] = useState<boolean>(false);
-
-    const style = {
-      position: 'absolute' as 'absolute',
-      top: '50%',
-      left: '50%',
-      transform: 'translate(-50%, -50%)',
-      width: 400,
-      bgcolor: 'background.paper',
-      border: '2px solid #000',
-      boxShadow: 24,
-      p: 4,
-    };
     
     function handleShow() {
       setOpen(open = !open);
@@ -35,7 +23,7 @@ export default function IssueCard(props: {title: string, description: string, is
 
   return (
     <div onClick={handleShow} >
-    <Card className ="issueCard" sx={{ width: "100%", height: "100%" }}>
+    <Card className ="issueCard">
       <CardContent>
         <Typography sx={{ fontSize: 12}} color="text.secondary" gutterBottom>
           #{props.issueNumber}

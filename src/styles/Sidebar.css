@@ -17,6 +17,7 @@ nav {
     nav ul li{
         margin: 0;
         padding: 1.5em 0.5em;
+        font-size: 20px;
     }
     nav ul li:hover {
         cursor: pointer;

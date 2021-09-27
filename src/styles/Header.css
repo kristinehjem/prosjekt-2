@@ -1,7 +1,13 @@
 .header {
     height: 10vh;
+    background-color: #37474F;
+    border-bottom: 1px solid white;
 }
 
 .header h1 {
+    text-align: center;
     margin: 0;
+    padding-top: 15px;
+    color: white;
+    font-weight: bold;
 }
