@@ -5,12 +5,14 @@ const contentContext = React.createContext("issues");
 export const contentContextUpdate = React.createContext((newValue:string) => {return;})
 
 export function useContentContext(){
-    return useContext(contentContext)
+    return useContext(contentContext);
 }
 
 export function ContentProvider(children: contentContextApiProps){
+    //default value for sidebarView is issues
     const [content, setContent] = useState("issues")
     function setContentContext(newValue:string){
+        localStorage.setItem('sidebarView', newValue);
         setContent(newValue);
     }
     return (
