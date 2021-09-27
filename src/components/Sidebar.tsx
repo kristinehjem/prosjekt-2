@@ -1,7 +1,6 @@
 import React from "react";
 import { contentContextUpdate } from "../contexts/contextApi";
 import "../styles/Sidebar.css"
-import Issues from "./Issues";
 class Sidebar extends React.Component {
     render() {
         return (

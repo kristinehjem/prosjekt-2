@@ -67,7 +67,7 @@ export default function Commits() {
     setChartsData(newChartsDataState);
   }
 
-  useEffect(() => {c
+  useEffect(() => {
     const fetchCommits = async () => {
       try {
         const commits = await getCommitsFromGitlab();

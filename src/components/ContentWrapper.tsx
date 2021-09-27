@@ -9,9 +9,9 @@ import { DateIntervallProvider } from "../contexts/DateFilterContext";
 function ContentWrapper() {
   const contentValue = useContentContext();
   let content = () => {
-    if (contentValue == "issues") {
+    if (contentValue === "issues") {
       return <Issues />;
-    } else if (contentValue == "commits") {
+    } else if (contentValue === "commits") {
       return (
         <DateIntervallProvider>
           <Commits />
