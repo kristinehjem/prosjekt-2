@@ -1,6 +1,9 @@
 .content-wrapper {
     display: flex;
-    height: 100%;
+    height: 90vh;
+}
+.content{
+    overflow-y: scroll;
 }
 .sidebar-wrapper {
     height: 100%;
@@ -24,7 +27,7 @@
         max-height: 20vh;
     }
     .content {
-        height: 80vh;
+        height: 70vh;
         width: 100vw;
 
     }
