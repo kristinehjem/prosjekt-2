@@ -56,7 +56,7 @@ export default function Issues() {
   }
 
   let issueItems = filteredIssues.map((issue) =>
-    <div className="issue" onClick={showIssueDescription}>
+    <div className="issue">
       <IssueCard title = {issue.title} description = {issue.description} issueNumber ={issue.iid} labels = {issue.labels}/>
     </div>
   );
@@ -77,11 +77,6 @@ export default function Issues() {
     </div>
 
   );
-
-  function showIssueDescription(event: MouseEvent<HTMLDivElement>) {
-    console.log(event);
-
-  }
 
   function changeFilter(event: React.ChangeEvent<HTMLSelectElement>) {
     console.log(event.target.value);
