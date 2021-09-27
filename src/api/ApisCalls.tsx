@@ -1,4 +1,4 @@
-import { GITLAB_TOKEN } from "../tokens";
+import { GITLAB_TOKEN } from "./tokens";
 
 const url = "https://gitlab.stud.idi.ntnu.no/api/v4/projects/11800";
 
