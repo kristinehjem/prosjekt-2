@@ -3,7 +3,8 @@
     height: 90vh;
 }
 .content{
-    overflow-y: scroll;
+    overflow-y: auto;
+    overflow-x: auto;
 }
 .sidebar-wrapper {
     height: 100%;
@@ -11,10 +12,10 @@
 }
 @media (min-width: 600px){
     .sidebar-wrapper {
-        width: 15vw;
+        width: 18vw;
     }
     .content {
-        width: 85vw;
+        width: 78vw;
     }
 }
 
@@ -27,7 +28,7 @@
         max-height: 20vh;
     }
     .content {
-        height: 70vh;
+        min-height: 70vh;
         width: 100vw;
 
     }
