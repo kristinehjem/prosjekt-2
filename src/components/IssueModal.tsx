@@ -1,35 +1,36 @@
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { useModal} from '../contexts/ModalContext'
+import "../styles/IssueModal.css"
 
-const ShowIssueDescription = (props: {description: string, issueNumber: number}) => {
+const IssueModal = (props: {state: React.MouseEventHandler}) => {
 
     const style = {
         position: 'absolute' as 'absolute',
-        top: '50%',
-        left: '50%',
         transform: 'translate(-50%, -50%)',
+        top: '50%',
+        left: '58%',
         width: 400,
         bgcolor: 'background.paper',
-        border: '2px solid #000',
-        boxShadow: 24,
+        border: '2px solid #37474F',
+        boxShadow: 5,
         p: 4,
       };
   
     return (
-      <div>
+      <div className="modal">
         <Box sx={style}>
+        <button className="exitButton" onClick={props.state}>x</button>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            Description of issue #{props.issueNumber}
+            Description of issue #
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            {props.description}
+            {useModal()}
           </Typography>
         </Box>
       </div>
     );
   }
 
-  export default ShowIssueDescription
+  export default IssueModal

@@ -23,6 +23,7 @@ export function DateIntervallProvider(children: contextProps) {
   const [dateIntervall, changeDateIntervall] = useState<number[]>([0, 15]);
 
   function setDateIntervall(start: number, end: number) {
+    console.log("inne i setdateintervall")
     changeDateIntervall([start, end]);
   }
 

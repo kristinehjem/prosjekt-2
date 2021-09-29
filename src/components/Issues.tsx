@@ -3,6 +3,8 @@ import React, { MouseEvent, useEffect, useState } from 'react';
 import { getIssuesFromGitlab } from "../api/ApisCalls"
 import { Issue } from "../types";
 import  IssueCard  from "./IssueCard"
+import { useModalUpdate, useModal } from '../contexts/ModalContext'
+import IssueModal from './IssueModal';
 
 
 export default function Issues() {
@@ -10,13 +12,20 @@ export default function Issues() {
   const [issues, setIssues] = useState<Issue[] | []>([]);
   const [issuesFilter, setIssuesFilter] = useState<String>("");
   const [filteredIssues, setFilteredIssues] = useState<Issue[] | []>([]);
+  let [modal, setModal] = useState<boolean>(false);
+  let setDescription = useModalUpdate();
+    
+  function setDescriptionContext(description: string) {
+    console.log("Inne i setdescriptionContext")
+    setDescription(description);
+  }
+
+  const ToggleModal = () => setModal(!modal);
 
   useEffect(() => {
     const fetchIssuesList = async () => {
       const response = await getIssuesFromGitlab()
       setIssues(response);
-      // console.log(response);
-      // console.log("hey");
     }
     fetchIssuesList();
     let initialFilter = sessionStorage.getItem('issuesFilter')
@@ -39,7 +48,6 @@ export default function Issues() {
         return issue.state == issuesFilter
       })
     }
-    // console.log("filteredIssues", _filteredIssues);
     setFilteredIssues(_filteredIssues)
   }, [issuesFilter, issues])
 
@@ -57,7 +65,11 @@ export default function Issues() {
 
   let issueItems = filteredIssues.map((issue) =>
     <div className="issue">
-      <IssueCard title = {issue.title} description = {issue.description} issueNumber ={issue.iid} labels = {issue.labels}/>
+      <IssueCard title = {issue.title} description = {issue.description} issueNumber ={issue.iid} labels = {issue.labels} onClick={() => { 
+        setDescriptionContext(issue.description)
+        ToggleModal()
+        }}/>
+      {modal ? <IssueModal state={ToggleModal}/> : null}
     </div>
   );
   return (
