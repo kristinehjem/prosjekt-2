@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useEffect } from "react";
 import Slider from "@mui/material/Slider";
 import { format, parseISO } from "date-fns";
 import "../styles/DateSlider.css";
@@ -18,9 +18,14 @@ function numberToDate(currentNum: number, startDateStr: string): string {
 
 export default function DateSlider(props: { data: commitsByDate[] }) {
   const numDays = props.data.length;
-  // const [value, setvalue] = React.useState<number[]>([0, numDays]);
   const setIntervall = useDateIntervallUpdate();
   const intervall = useDateIntevall();
+
+  // Initialize the slider with correct values.
+  // Updates when props.data is complete
+  useEffect(() => {
+    setIntervall(0, numDays - 1);
+  }, [numDays]);
 
   const marks = [
     {
@@ -66,6 +71,7 @@ export default function DateSlider(props: { data: commitsByDate[] }) {
         valueLabelFormat={(num) => numberToDate(num, props.data[0].date)}
         disableSwap
         sx={{
+          fontFamily: 'Montserrat',
           color: "#8884d8",
         }}
       />

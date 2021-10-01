@@ -8,9 +8,10 @@
 .label {
     display: inline-block;
     width: 1fr;
-    margin: 2px 2px;
+    margin: 6px 2px 0 2px;
     padding: 4px;
-    background-color: #e5dbe2;
+    color: white;
+    background-color: #c5acbd;
     border-radius: 15px;
     font-size: 14px;
 }

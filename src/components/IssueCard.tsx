@@ -15,13 +15,13 @@ export default function IssueCard(props: {title: string, description: string, is
     <div>
     <Card className ="issueCard">
       <CardContent>
-        <Typography sx={{ fontSize: 12}} color="text.secondary" gutterBottom>
+        <Typography sx={{ fontSize: 14, fontFamily: 'Montserrat'}} color="text.secondary" gutterBottom>
           #{props.issueNumber}
         </Typography>
-        <Typography component="div">
+        <Typography sx={{fontFamily: 'Montserrat', fontWeight: 500, fontSize: 16}} component="div">
           {props.title}
         </Typography>
-        <Typography className="labels" sx={{ mb: 1.5 }} color="text.secondary" component="div">
+        <Typography className="labels" sx={{ mb: 1.5, fontFamily: 'Montserrat'}} component="div">
           {issueLabels}
         </Typography>
       </CardContent>
