@@ -18,7 +18,7 @@ Løsningen er også brukt for i `App` for å holde styr på hvilken side som vis
 
 
 ## Data fra GitLab med AJAX
-Vi har en egen fil med utility-funksjoner for å hente data fra GitLab. Alle funksjonene her er asynchronus slik at siden kan rendres mens vi venter på svar fra GitLab apiet. Vi ønsket å gjøre funksjonene allsidige slik at de kunne brukes til å hente flere typer responser (commits og issues) fra GitLab og det er grunnen til at vi har brukt en liste av typen `any` for å samle opp responsene. For å løse fetching for tilfeller med mange issues eller commits,  har vi en while-løkke som vil fortsette å hente ut data med perpage-antall på 100, helt til det ikke er mer å hente.
+Vi har en egen fil med utility-funksjoner for å hente data fra GitLab. Alle funksjonene her er asynchronus slik at siden kan rendres mens vi venter på svar fra GitLab apiet. Vi ønsket å gjøre funksjonene allsidige slik at de kunne brukes til å hente flere typer responser (`commits` og `issues`) fra GitLab og det er grunnen til at vi har brukt en liste av typen `any` for å samle opp responsene. For å løse fetching for tilfeller med mange issues eller commits,  har vi en while-løkke som vil fortsette å hente ut data med perpage-antall på 100, helt til det ikke er mer å hente.
 
 
 ## HTML web-storage
@@ -30,4 +30,8 @@ Media queries er brukt til å danne et responsivt design. Menyen for å velge co
 ## Testing
 For testing har vi skrevet tre snapshottester: en til hele applikasjonen og en til hver av hovedkomponentene commits og issues. I tillegg har vi brukt userEvents til å sjekke om endringer av dropdown-menyen for filtreringen av issues fungerer slik vi vil. For å kjøre testene kjører man ‘npm test’ inne i ‘prosjekt-2’ i terminalen.
 
-For å teste responsivitet og brukergrensensnitt har vi gjort brukertester på skjermer med ulik vindusstørrelse. Underveis i prosjektet har vi brukt ‘inspiser’ for å regelmessig sjekke at applikasjonen oppfører seg som forventet. Etter vi deployet applikasjonen sjekket vi appen på andre enheter (iPhone, iPad).
+For å teste responsivitet og brukergrensensnitt har vi gjort brukertester på skjermer med ulik vindusstørrelse. Underveis i prosjektet har vi brukt ‘inspiser’ for å regelmessig sjekke at applikasjonen oppfører seg som forventet. Etter vi deployet applikasjonen sjekket vi appen på andre enheter (iPhone, iPad). Her er noen bilder av brukertesting på mobile enheter. 
+![](./testImages/ipone_test1.png)
+![](./testImages/ipone_test2.png)
+![](testImages/test_ipad.png)
+![](testImages/test_ipad2.png) 
