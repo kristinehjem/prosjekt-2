@@ -1,10 +1,12 @@
 .content-wrapper {
+    flex: 1 1 auto;
     display: flex;
-    height: 90vh;
+    overflow: auto;
 }
 .content{
     overflow-y: auto;
     overflow-x: auto;
+    /* background-color: #dbe2e5 */
 }
 
 .content.modal {
@@ -20,7 +22,7 @@
         width: 18vw;
     }
     .content {
-        width: 78vw;
+        width: 82vw;
     }
 }
 
@@ -29,8 +31,8 @@
         flex-direction: column;
     }
     .sidebar-wrapper {
-        height: fit-content;
         max-height: 20vh;
+        height: fit-content;
     }
     .content {
         min-height: 70vh;
