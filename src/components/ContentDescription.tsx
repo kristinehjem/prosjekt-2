@@ -7,7 +7,7 @@ export default function ContentDescription(props: {
   return (
     <>
       <h2 className="component-header">{props.header}</h2>
-      <p className="commit-description">{props.content}</p>
+      <p className="component-description">{props.content}</p>
     </>
   );
 }

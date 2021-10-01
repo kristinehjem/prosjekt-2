@@ -2,21 +2,21 @@ import "../styles/Issues.css";
 import React, { MouseEvent, useEffect, useState } from "react";
 import { getIssuesFromGitlab } from "../api/ApisCalls";
 import { Issue } from "../types";
-import IssueCard from "./IssueCard";
+import  IssueCard  from "./IssueCard"
+import { useModalUpdate } from '../contexts/ModalContext'
 import ContentDescription from "./ContentDescription";
 
 export default function Issues() {
   const [issues, setIssues] = useState<Issue[] | []>([]);
   const [issuesFilter, setIssuesFilter] = useState<String>("");
   const [filteredIssues, setFilteredIssues] = useState<Issue[] | []>([]);
+  let setModalContent = useModalUpdate();
 
   useEffect(() => {
     const fetchIssuesList = async () => {
       const response = await getIssuesFromGitlab();
       setIssues(response);
-      // console.log(response);
-      // console.log("hey");
-    };
+    }
     fetchIssuesList();
     let initialFilter = sessionStorage.getItem("issuesFilter");
     if (initialFilter == null) {
@@ -37,9 +37,8 @@ export default function Issues() {
         return issue.state == issuesFilter;
       });
     }
-    // console.log("filteredIssues", _filteredIssues);
-    setFilteredIssues(_filteredIssues);
-  }, [issuesFilter, issues]);
+    setFilteredIssues(_filteredIssues)
+  }, [issuesFilter, issues])
 
   // checking in sessionStorage for the previous selected option
   let selectOption = "";
@@ -53,21 +52,24 @@ export default function Issues() {
     selectOption = "Show closed";
   }
 
-  let issueItems = filteredIssues.map((issue) => (
-    <div className="issue">
-      <IssueCard
-        title={issue.title}
-        description={issue.description}
-        issueNumber={issue.iid}
-        labels={issue.labels}
-      />
+  let issueItems = filteredIssues.map((issue) =>
+    <div className="issue"
+    onClick={() => { 
+      setModalContent(issue.description, issue.iid, true)
+      }}
+    > 
+      <IssueCard 
+      title = {issue.title} 
+      description = {issue.description} 
+      issueNumber ={issue.iid} 
+      labels = {issue.labels}/>
     </div>
-  ));
+  );
 
   // TODO: Skriv beskrivelse av issues.
   const contentProps = {
     header: "Issues",
-    content: "Laaaang beskrivelse av issues",
+    content: "Overview over all issues from the project, with the ability to filter between showing all, opened or closed issues. An issue has a issuenumber, title and labels. If you click on an issue the description will show up in a pop-up.",
   };
 
   return (

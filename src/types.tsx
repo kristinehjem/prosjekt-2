@@ -32,3 +32,9 @@ export interface commitsByDate {
 export type contentContextApiProps = {
     children: ReactNode,
 }
+
+export type modalContext = {
+    description: string,
+    issueNumber: number,
+    modalState: boolean
+}

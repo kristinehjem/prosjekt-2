@@ -3,14 +3,21 @@ import "../styles/ContentWrapper.css";
 import Sidebar from "./Sidebar";
 import Commits from "./Commits";
 import Issues from "./Issues";
+import IssueModal from "./IssueModal";
 import { DateIntervallProvider } from "../contexts/DateFilterContext";
+import { ModalProvider } from "../contexts/ModalContext";
 
 
 function ContentWrapper() {
   const contentValue = useContentContext();
   let content = () => {
     if (contentValue == "issues") {
-      return <Issues />;
+      return (
+      <ModalProvider>
+        <Issues/>
+        <IssueModal/>
+      </ModalProvider>
+      );
     } else if (contentValue == "commits") {
       return (
         <DateIntervallProvider>

@@ -6,6 +6,11 @@
     overflow-y: auto;
     overflow-x: auto;
 }
+
+.content.modal {
+    top: '50%';
+    left: '90%';
+}
 .sidebar-wrapper {
     height: 100%;
     display: flex;
