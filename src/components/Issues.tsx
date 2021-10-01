@@ -3,7 +3,7 @@ import React, { MouseEvent, useEffect, useState } from "react";
 import { getIssuesFromGitlab } from "../api/ApisCalls";
 import { Issue } from "../types";
 import  IssueCard  from "./IssueCard"
-import { useModalUpdate, useModal } from '../contexts/ModalContext'
+import { useModalUpdate } from '../contexts/ModalContext'
 import ContentDescription from "./ContentDescription";
 
 export default function Issues() {
