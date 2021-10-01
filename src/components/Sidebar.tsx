@@ -5,13 +5,14 @@ import Issues from "./Issues";
 class Sidebar extends React.Component {
     static contextType = contentContextUpdate;
     
-    componentDidMount() {
+    componentWillMount() {
         const content = this.context
         const sidebarView = localStorage.getItem('sidebarView');
         if (sidebarView != null) {
             content(sidebarView);
         }
     }
+
     render() {
         return (
             <contentContextUpdate.Consumer>
