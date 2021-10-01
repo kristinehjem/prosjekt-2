@@ -1,4 +1,5 @@
-import React, { ReactNode, useContext, useState } from "react";
+import React, { useContext, useState } from "react";
+import { ContextProviderProps } from "../types"
 
 // Source: https://www.youtube.com/watch?v=5LrDIWkK_Bc&t=637s
 
@@ -16,14 +17,11 @@ export function useDateIntevall() {
 export function useDateIntervallUpdate() {
   return useContext(DateIntervallUpdateContext);
 }
-export type contextProps = {
-  children: ReactNode;
-};
-export function DateIntervallProvider(children: contextProps) {
+
+export function DateIntervallProvider(children: ContextProviderProps) {
   const [dateIntervall, changeDateIntervall] = useState<number[]>([0, 10]);
 
   function setDateIntervall(start: number, end: number) {
-    console.log("inne i setdateintervall")
     changeDateIntervall([start, end]);
   }
 

@@ -29,7 +29,7 @@ export interface commitsByDate {
     commits: number
 }
 
-export type contentContextApiProps = {
+export type ContextProviderProps = {
     children: ReactNode,
 }
 

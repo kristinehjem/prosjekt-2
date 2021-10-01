@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { Api_commits, commitsByDate } from "../types";
+import { useEffect, useState } from "react";
 import { getCommitsFromGitlab } from "../api/ApisCalls";
-import Chart from "./CommitsChart";
-import DateSlider from "./DateSlider";
-import ContentDescription from "./ContentDescription";
 import "../styles/Commits.css";
+import { Api_commits, commitsByDate } from "../types";
+import Chart from "./CommitsChart";
+import ContentDescription from "./ContentDescription";
+import DateSlider from "./DateSlider";
 
 function getDates(startDateStr: string, stopDateStr: string) {
   /**
@@ -73,7 +73,6 @@ export default function Commits() {
   }
 
   useEffect(() => {
-    let isMounted = true;
     const fetchCommits = async () => {
       try {
         const commits = await getCommitsFromGitlab();

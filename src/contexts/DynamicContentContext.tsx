@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { contentContextApiProps } from "../types";
+import { ContextProviderProps } from "../types";
 
 const contentContext = React.createContext("issues");
 export const contentContextUpdate = React.createContext((newValue:string) => {return;})
@@ -8,7 +8,7 @@ export function useContentContext(){
     return useContext(contentContext);
 }
 
-export function ContentProvider(children: contentContextApiProps){
+export function ContentProvider(children: ContextProviderProps){
     //default value for sidebarView is issues
     const [content, setContent] = useState("issues")
     function setContentContext(newValue:string){
