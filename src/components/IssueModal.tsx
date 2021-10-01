@@ -34,8 +34,8 @@ const IssueModal = () => {
           <button className="exitButton" onClick={() => {setModalContent(modalContent.description, modalContent.issueNumber, false)}}>x</button>
           <Typography id="modal-modal-title" variant="h6" component="h2">
           {(modalContent.description != "") ?
-          `Description of issue # ${modalContent.issueNumber}`
-          : `No description of issue # ${modalContent.issueNumber}`}
+          `Description of issue #${modalContent.issueNumber}`
+          : `No description of issue #${modalContent.issueNumber}`}
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
           {modalContent.description}
