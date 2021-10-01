@@ -41,8 +41,8 @@ export default function Chart(props: { data: commitsByDate[] }) {
 
   return (
     <div className="chart">
-      <ResponsiveContainer width="100%" height={400}>
-        <AreaChart
+          <ResponsiveContainer width="100%" height="100%">
+          <AreaChart
           data={filteredData}
           margin={{
             top: 5,

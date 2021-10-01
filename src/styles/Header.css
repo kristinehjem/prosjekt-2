@@ -1,5 +1,7 @@
 .header {
-    height: 75px;
+    display: table-row;
+    height: 10vh;
+    min-height: 75px;
     background-color: #37474F;
     border-bottom: 1px solid white;
 }

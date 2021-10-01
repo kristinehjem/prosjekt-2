@@ -11,3 +11,7 @@ h4.date {
 p.numCommits {
   margin: 2px;
 }
+
+.chart {
+  height: 60vh;
+} 

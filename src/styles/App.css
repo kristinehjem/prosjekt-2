@@ -2,8 +2,10 @@
 
 .App {
   text-align: center;
-  height: 100vh;
   background-color: #dbe2e5;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 }
 
 body {
