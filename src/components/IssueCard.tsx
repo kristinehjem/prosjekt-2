@@ -6,12 +6,13 @@ import "../styles/IssueCard.css"
 
 //code from https://mui.com/components/cards/
 
-export default function IssueCard(props: {onClick? : React.MouseEventHandler, title: string, description: string, issueNumber: number, labels: string[]}) {
-    let issueLabels = props.labels.map((label)=>
+export default function IssueCard(props: {title: string, description: string, issueNumber: number, labels: string[]} ) {
+  let issueLabels = props.labels.map((label)=>
     <div className="label">{label}</div>)
+  
 
   return (
-    <div onClick={props.onClick}>
+    <div>
     <Card className ="issueCard">
       <CardContent>
         <Typography sx={{ fontSize: 12}} color="text.secondary" gutterBottom>

@@ -12,15 +12,7 @@ export default function Issues() {
   const [issues, setIssues] = useState<Issue[] | []>([]);
   const [issuesFilter, setIssuesFilter] = useState<String>("");
   const [filteredIssues, setFilteredIssues] = useState<Issue[] | []>([]);
-  let [modal, setModal] = useState<boolean>(false);
-  let setDescription = useModalUpdate();
-    
-  function setDescriptionContext(description: string) {
-    console.log("Inne i setdescriptionContext")
-    setDescription(description);
-  }
-
-  const ToggleModal = () => setModal(!modal);
+  let setModalContent = useModalUpdate();
 
   useEffect(() => {
     const fetchIssuesList = async () => {
@@ -64,12 +56,12 @@ export default function Issues() {
   }
 
   let issueItems = filteredIssues.map((issue) =>
-    <div className="issue">
-      <IssueCard title = {issue.title} description = {issue.description} issueNumber ={issue.iid} labels = {issue.labels} onClick={() => { 
-        setDescriptionContext(issue.description)
-        ToggleModal()
-        }}/>
-      {modal ? <IssueModal state={ToggleModal}/> : null}
+    <div className="issue"
+    onClick={() => { 
+      setModalContent(issue.description, issue.iid, true)
+      }}
+    > 
+      <IssueCard title = {issue.title} description = {issue.description} issueNumber ={issue.iid} labels = {issue.labels}/>
     </div>
   );
   return (

@@ -18,8 +18,10 @@
     color: #37474F;
     text-align:center;
     transition: all 0.2s;
+    float: right;
 }
 
 .exitButton:hover{
     border-color: #37474F;
 }
+

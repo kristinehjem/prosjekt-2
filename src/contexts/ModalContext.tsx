@@ -1,24 +1,26 @@
 import React, { useContext, useState } from "react";
-import { contentContextApiProps } from "../types";
+import { contentContextApiProps, modalContext } from "../types";
 
-export const ModalContext = React.createContext("Description");
-export const ModalUpdateContext = React.createContext((newDescription:string) => {return;});
+const defaultModalContent:modalContext = {description: "", issueNumber: -1, modalState: false}
+export const ModalContext = React.createContext(defaultModalContent);
+export const ModalUpdateContext = React.createContext((newDescription:string, newIssueNumber:number, newModalState:boolean) => {return;});
 
 export function useModal(){
     return useContext(ModalContext);
 }
 
 export function useModalUpdate() {
-    console.log("inne i useModalContextUpdate")
     return useContext(ModalUpdateContext);
 }
   
 export function ModalProvider(children: contentContextApiProps){
-    const [modal, setModal] = useState<string>("Description");
+    const [modal, setModal] = useState<modalContext>(defaultModalContent);
 
-    function setModalContext(newValue:string){
-        console.log("inne i setModalContext")
-        setModal(newValue);
+    function setModalContext(newDescription:string, newIssueNumber:number, newModalState:boolean){
+        setModal({
+            description: newDescription,
+            issueNumber: newIssueNumber,
+            modalState: newModalState});
     }
     return (
         <ModalContext.Provider value={modal}>
