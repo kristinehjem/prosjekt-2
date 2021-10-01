@@ -24,7 +24,6 @@ const IssueModal = () => {
         borderRadius:"20px"
       };
 
-  console.log(modalContent.modalState)
   return (
       <Modal
         open={modalContent.modalState}

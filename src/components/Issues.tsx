@@ -94,7 +94,6 @@ export default function Issues() {
   );
 
   function changeFilter(event: React.ChangeEvent<HTMLSelectElement>) {
-    console.log(event.target.value);
     setIssuesFilter(event.target.value);
     sessionStorage.setItem("issuesFilter", event.target.value);
   }

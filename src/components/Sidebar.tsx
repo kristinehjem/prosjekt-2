@@ -1,5 +1,5 @@
 import React from "react";
-import { contentContextUpdate} from "../contexts/contextApi";
+import { contentContextUpdate} from "../contexts/DynamicContentContext";
 import "../styles/Sidebar.css"
 import Issues from "./Issues";
 class Sidebar extends React.Component {

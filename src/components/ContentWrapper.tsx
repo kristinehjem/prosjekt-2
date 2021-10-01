@@ -1,4 +1,4 @@
-import { useContentContext } from "../contexts/contextApi";
+import { useContentContext } from "../contexts/DynamicContentContext";
 import "../styles/ContentWrapper.css";
 import Sidebar from "./Sidebar";
 import Commits from "./Commits";
