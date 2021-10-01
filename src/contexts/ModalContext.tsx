@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { contentContextApiProps, modalContext } from "../types";
+import { ContextProviderProps, modalContext } from "../types";
 
 const defaultModalContent:modalContext = {description: "", issueNumber: -1, modalState: false}
 export const ModalContext = React.createContext(defaultModalContent);
@@ -13,7 +13,7 @@ export function useModalUpdate() {
     return useContext(ModalUpdateContext);
 }
   
-export function ModalProvider(children: contentContextApiProps){
+export function ModalProvider(children: ContextProviderProps){
     const [modal, setModal] = useState<modalContext>(defaultModalContent);
 
     function setModalContext(newDescription:string, newIssueNumber:number, newModalState:boolean){
