@@ -34,9 +34,7 @@ async function getAllData(urlSuffix: String) {
     const response = await getDataFromGitlab(
       urlSuffix + "?per_page=" + perPage + "&page=" + iterator
     );
-    response.map((res: any) => {
-      allResponses.push(res);
-    });
+    response.map((res: any) => allResponses.push(res));
     sizeOfResponse = response.length;
     iterator++;
   }

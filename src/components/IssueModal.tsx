@@ -1,11 +1,10 @@
-import { Button, makeStyles } from '@mui/material';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Typography from '@mui/material/Typography';
 import { findByLabelText } from '@testing-library/react';
-import { useState, useContext } from 'react';
-import { useModal, useModalUpdate} from '../contexts/ModalContext'
 import "../styles/IssueModal.css"
+import { useModal, useModalUpdate } from '../contexts/ModalContext';
+import "../styles/IssueModal.css";
 
 const IssueModal = () => {
 
@@ -38,7 +37,7 @@ const IssueModal = () => {
         }}>
           <button className="exitButton" onClick={() => {setModalContent(modalContent.description, modalContent.issueNumber, false)}}>x</button>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-          {(modalContent.description != "") ?
+          {(modalContent.description !== "") ?
           `Description of issue #${modalContent.issueNumber}`
           : `No description of issue #${modalContent.issueNumber}`}
           </Typography>

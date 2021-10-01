@@ -1,5 +1,5 @@
 import "../styles/Issues.css";
-import React, { MouseEvent, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { getIssuesFromGitlab } from "../api/ApisCalls";
 import { Issue } from "../types";
 import  IssueCard  from "./IssueCard"
@@ -19,7 +19,7 @@ export default function Issues() {
     }
     fetchIssuesList();
     let initialFilter = sessionStorage.getItem("issuesFilter");
-    if (initialFilter == null) {
+    if (initialFilter === null) {
       sessionStorage.setItem("issuesFilter", "all");
       setIssuesFilter("all");
     } else {
@@ -29,12 +29,12 @@ export default function Issues() {
 
   useEffect(() => {
     let _filteredIssues = [];
-    if (issuesFilter == "all") {
+    if (issuesFilter === "all") {
       _filteredIssues = issues;
     } else {
       _filteredIssues = issues;
       _filteredIssues = _filteredIssues.filter((issue) => {
-        return issue.state == issuesFilter;
+        return issue.state === issuesFilter;
       });
     }
     setFilteredIssues(_filteredIssues)
@@ -42,13 +42,13 @@ export default function Issues() {
 
   // checking in sessionStorage for the previous selected option
   let selectOption = "";
-  if (sessionStorage.getItem("issuesFilter") == "all") {
+  if (sessionStorage.getItem("issuesFilter") === "all") {
     selectOption = "Show All";
   }
-  if (sessionStorage.getItem("issuesFilter") == "opened") {
+  if (sessionStorage.getItem("issuesFilter") === "opened") {
     selectOption = "Show open";
   }
-  if (sessionStorage.getItem("issuesFilter") == "closed") {
+  if (sessionStorage.getItem("issuesFilter") === "closed") {
     selectOption = "Show closed";
   }
 

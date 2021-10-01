@@ -1,4 +1,4 @@
-import React, { ReactNode, useContext, useState } from "react";
+import React, { useContext, useState } from "react";
 import { ContextProviderProps } from "../types"
 
 // Source: https://www.youtube.com/watch?v=5LrDIWkK_Bc&t=637s
