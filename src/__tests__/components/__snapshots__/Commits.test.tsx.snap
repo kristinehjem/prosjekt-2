@@ -5,7 +5,16 @@ exports[`renders commits 1`] = `
   <div
     class="commits"
   >
-    <p />
+    <h2
+      class="component-header"
+    >
+      Commits
+    </h2>
+    <p
+      class="component-description"
+    >
+      The graph below shows commits per day over the period chosen on the slider under the graph. 10th of september was the day of the first commits, and the end date on the graph is the date of the latest commit to the repository.
+    </p>
     <div
       class="chart"
     >
@@ -13,6 +22,104 @@ exports[`renders commits 1`] = `
         class="recharts-responsive-container"
         style="width: 100%; height: 400px;"
       />
+    </div>
+    <div
+      class="date-slider-wrapper"
+    >
+      <span
+        class="MuiSlider-colorPrimary MuiSlider-sizeMedium MuiSlider-root MuiSlider-marked css-1i2njdt-MuiSlider-root"
+      >
+        <span
+          class="MuiSlider-rail css-14pt78w-MuiSlider-rail"
+        />
+        <span
+          class="MuiSlider-track css-1gv0vcd-MuiSlider-track"
+        />
+        <span
+          class="MuiSlider-mark MuiSlider-markActive css-6cwnna-MuiSlider-mark"
+          data-index="0"
+        />
+        <span
+          aria-hidden="true"
+          class="MuiSlider-markLabel MuiSlider-markLabelActive css-1eoe787-MuiSlider-markLabel"
+          data-index="0"
+        >
+          Sep, 10
+        </span>
+        <span
+          class="MuiSlider-mark MuiSlider-markActive css-6cwnna-MuiSlider-mark"
+          data-index="1"
+        />
+        <span
+          aria-hidden="true"
+          class="MuiSlider-markLabel MuiSlider-markLabelActive css-1eoe787-MuiSlider-markLabel"
+          data-index="1"
+        >
+          Sep, 10
+        </span>
+        <span
+          class="MuiSlider-thumbColorPrimary MuiSlider-thumbSizeMedium MuiSlider-thumb css-eg0mwd-MuiSlider-thumb"
+          data-index="0"
+          style="pointer-events: none;"
+        >
+          <input
+            aria-orientation="horizontal"
+            aria-valuemax="0"
+            aria-valuemin="0"
+            aria-valuenow="0"
+            data-index="0"
+            max="0"
+            style="border: 0px; height: 100%; margin: -1px; overflow: hidden; padding: 0px; position: absolute; white-space: nowrap; width: 100%; direction: ltr;"
+            type="range"
+            value="0"
+          />
+          <span
+            aria-hidden="true"
+            class="MuiSlider-valueLabel css-1kz0hui-MuiSlider-valueLabel"
+          >
+            <span
+              class="MuiSlider-valueLabelCircle"
+            >
+              <span
+                class="MuiSlider-valueLabelLabel"
+              >
+                Sep, 10
+              </span>
+            </span>
+          </span>
+        </span>
+        <span
+          class="MuiSlider-thumbColorPrimary MuiSlider-thumbSizeMedium MuiSlider-thumb css-eg0mwd-MuiSlider-thumb"
+          data-index="1"
+          style="pointer-events: none;"
+        >
+          <input
+            aria-orientation="horizontal"
+            aria-valuemax="0"
+            aria-valuemin="0"
+            aria-valuenow="0"
+            data-index="1"
+            max="0"
+            style="border: 0px; height: 100%; margin: -1px; overflow: hidden; padding: 0px; position: absolute; white-space: nowrap; width: 100%; direction: ltr;"
+            type="range"
+            value="0"
+          />
+          <span
+            aria-hidden="true"
+            class="MuiSlider-valueLabel css-1kz0hui-MuiSlider-valueLabel"
+          >
+            <span
+              class="MuiSlider-valueLabelCircle"
+            >
+              <span
+                class="MuiSlider-valueLabelLabel"
+              >
+                Sep, 10
+              </span>
+            </span>
+          </span>
+        </span>
+      </span>
     </div>
   </div>
 </div>

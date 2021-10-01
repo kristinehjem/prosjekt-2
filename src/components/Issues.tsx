@@ -69,7 +69,7 @@ export default function Issues() {
   // TODO: Skriv beskrivelse av issues.
   const contentProps = {
     header: "Issues",
-    content: "Overview over all issues from the project, with the ability to filter between showing all, opened or closed issues. An issue has a issuenumber, title and labels. If you click on an issue the description will show up in a pop-up.",
+    content: "Overview over all issues from the project, with the ability to filter between showing all, opened or closed issues. An issue has an issuenumber, title and labels. If you click on an issue the description will show up in a pop-up.",
   };
 
   return (

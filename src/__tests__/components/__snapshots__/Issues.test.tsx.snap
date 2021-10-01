@@ -4,9 +4,16 @@ exports[`renders issues 1`] = `
 <div
   className="wrapper"
 >
-  <h1>
+  <h2
+    className="component-header"
+  >
     Issues
-  </h1>
+  </h2>
+  <p
+    className="component-description"
+  >
+    Overview over all issues from the project, with the ability to filter between showing all, opened or closed issues. An issue has a issuenumber, title and labels. If you click on an issue the description will show up in a pop-up.
+  </p>
   <div
     className="selectFilter"
   >
