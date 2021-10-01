@@ -66,6 +66,7 @@ export default function DateSlider(props: { data: commitsByDate[] }) {
         valueLabelFormat={(num) => numberToDate(num, props.data[0].date)}
         disableSwap
         sx={{
+          fontFamily: 'Montserrat',
           color: "#8884d8",
         }}
       />
