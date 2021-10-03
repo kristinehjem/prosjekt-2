@@ -28,9 +28,9 @@ Vi har brukt session storage på filtrering av issues. For hver gang det velges 
 Media queries er brukt til å danne et responsivt design. Menyen for å velge commits eller issues vil ved bred skjerm være plassert på venstresiden, mens den flyttes til under header for smale skjermer - inkludert mobile enheter. I tillegg vil menyen og noe av teksten skalere på en måte som gir bruker hensiktsmessig visning av alle sideelementer på svært små skjermer. Vi fant det ikke hensiktsmessig å bruke bilder i prosjektet, men har derimot inkludert en graf. Grafen bruker resposiveContainer fra recharts-biblioteket som sørger for at den skalerer riktig i bredden. 
 
 ## Testing
-For testing har vi skrevet tre snapshottester: en til hele applikasjonen og en til hver av hovedkomponentene commits og issues. I tillegg har vi brukt userEvents til å sjekke om endringer av dropdown-menyen for filtreringen av issues fungerer slik vi vil. For å kjøre testene kjører man ‘npm test’ inne i ‘prosjekt-2’ i terminalen.
+For testing har vi skrevet tre snapshottester: en til hele applikasjonen og en til hver av hovedkomponentene commits og issues. I tillegg har vi brukt `userEvents` til å sjekke om endringer av dropdown-menyen for filtreringen av issues fungerer slik vi vil. For å kjøre testene kjører man `npm test` inne i `prosjekt-2/src` i terminalen.
 
-For å teste responsivitet og brukergrensensnitt har vi gjort brukertester på skjermer med ulik vindusstørrelse. Underveis i prosjektet har vi brukt ‘inspiser’ for å regelmessig sjekke at applikasjonen oppfører seg som forventet. Etter vi deployet applikasjonen sjekket vi appen på andre enheter (iPhone, iPad). Her er noen bilder av brukertesting på mobile enheter. 
+For å teste responsivitet og brukergrensensnitt har vi gjort brukertester på skjermer med ulik vindusstørrelse. Underveis i prosjektet har vi brukt `inspiser` for å regelmessig sjekke at applikasjonen oppfører seg som forventet. Etter vi deployet applikasjonen sjekket vi appen på andre enheter (iPhone, iPad). Her er noen bilder av brukertesting på mobile enheter. 
 ![](testImages/iphone_test1.png)
 ![](testImages/iphone_test2.png)
 ![](testImages/test_ipad.png)
